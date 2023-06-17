@@ -1,0 +1,84 @@
+{% extends 'index.html' %} {% load static %} {% block header %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{% static 'css/inspection.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+{% endblock %} {% block content %}
+<form action="" name="inspection" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div calss="padding_inspection">
+        <div class="mb-3">
+            <label for="Upload_Image" class="form-label">Upload Image</label>
+            <input type="file" class="form-control" id="upload_image" name="input_upload_image">
+        </div>
+        <div class="mb-3">
+            <label for="Registration_Number" class="form-label">Registration Number</label>
+            <input type="text" class="form-control" id="registration_number" name="input_registration_number">
+        </div>
+        <div class=" mb-lg-1">
+            <label class="">Description</label>
+            <textarea class="form-control" aria-label="With textarea" name="textarea_description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="dropdown_value">Select a value</label>
+            <select class="form-select" id="dropdown_value" name="dropdown_value" aria-label="Default select example">
+          <option value="Scrap" name="option_scrap" selected>Scrap</option>
+          <option value="Service" name="option_service">Service</option>
+        </select>
+        </div>
+        <div class="mb-3">
+            <label for="Inspection_Person" class="form-label">Inspection Person</label>
+            <input type="text" class="form-control" id="inspection_person" name="input_inspection_person">
+        </div>
+        <div class="mb-3">
+            <label for="Car_Brand" class="form-label">Car Brand</label>
+            <input type="text" class="form-control" id="car_brand" name="input_car_brand">
+        </div>
+        <div class="mb-3">
+            <label for="Car_Model" class="form-label">Car Model</label>
+            <input type="text" class="form-control" id="car_model" name="input_car_model">
+        </div>
+        <div class="mb-3">
+            <label for="Year" class="form-label">Year</label>
+            <input type="number" class="form-control" id="year" min="2000" max="2023" name="input_year">
+        </div>
+        <div class="mb-3">
+            <label for="Variant" class="form-label">Variant</label>
+            <input type="text" class="form-control" id="variant" name="input_variant">
+        </div>
+        <div class="mb-3">
+            <label for="Meter_Reading" class="form-label">Meter Reading</label>
+            <input type="number" class="form-control" id="meter_reading" min="0" max="" name="input_meter_reading">
+        </div>
+        <div class="mb-3">
+            <table class="table-primary" name="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Questions</th>
+                        <th scope="col">Check</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for q in questions %}
+                    <tr>
+                        <td>{{q.questions}}</td>
+                        <td><input type="checkbox" name="checkbox" id="chk" value="{{q.questions}}" onclick="checkFunc(this.value)"></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary d-grid gap-2" name="btn_submit" id="btn_submit">Submit</button>
+        </div>
+    </div>
+</form>
+{% endblock %} {% block script %}
+
+<script>
+    function checkFunc(value) {
+        alert(value);
+    }
+</script>
+
+{% endblock %}

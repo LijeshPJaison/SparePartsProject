@@ -1,0 +1,44 @@
+{% extends 'index.html' %} {% load static %} {% block header %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{% static 'css/parts.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+{% endblock %} {% block content %}
+<form action="" name="" method="get">
+    {% csrf_token %}
+    <div class="mb-3">
+        <input type="search" placeholder="Search" name="search" id="search">
+        <button type="submit" name="btn_search" class="btn btn-primary" id="btn_search" data-bs-toggle="modal" data-bs-target="#exampleModal">Search</button>
+    </div>
+    <div class="mb-3">
+        <div class="mb-3">
+            {% if not obj %}
+            <p>No results found</p>
+            {% else %}
+            <p style="color: cornflowerblue;">Inspection Number: {{obj.id}}</p>
+            <p>Registration Number: {{obj.registration_number}}</p>
+            <p>Inspection Person: {{obj.inspection_person}}</p>
+            <p>Car Brand: {{obj.car_brand}}</p>
+            <p>Car Model: {{obj.car_model}}</p>
+            {% endif %}
+        </div>
+    </div>
+</form>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date" name="date">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Amount</label>
+        <input type="number" class="form-control" id="amount" name="amount">
+    </div>
+    <input type="text" hidden name="obj" value="{{obj.id}}">
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary d-grid gap-2" name="btn_submit" id="btn_submit">Submit</button>
+    </div>
+</form>
+
+{% endblock %} {% block script %} {% endblock %}
